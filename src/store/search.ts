@@ -41,7 +41,7 @@ const useSearchStore = create<SearchStore>((set) => ({
 		sex: undefined,
 		behavior: [],
 		isNeutrification: undefined,
-		walkingTime: undefined,
+		walkingTime: 0,
 		hairLength: undefined,
 		isIndependent: undefined,
 		childcareDifficulty: undefined,

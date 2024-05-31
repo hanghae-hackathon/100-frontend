@@ -16,6 +16,10 @@ export const StepHeader = ({
 		large: "text-4xl",
 	};
 	return (
-		<h1 className={cn("text-4xl font-bold mt-8", textSize[size])}>{title}</h1>
+		<h1
+			className={cn("text-4xl font-bold mt-8 text-[#B28A65]", textSize[size])}
+		>
+			{title}
+		</h1>
 	);
 };

@@ -1,6 +1,15 @@
 import type { FunctionComponent } from "../common/types";
-import { FirstStep } from "../components/step/FirstStep";
-import { TypeStep } from "../components/step/TypeStep";
+import { AgeStep } from "../components/step/steps/AgeStep";
+import { BehaviorStep } from "../components/step/steps/BehaviorStep";
+import { ChildcareStep } from "../components/step/steps/ChildcareStep";
+import { FirstStep } from "../components/step/steps/FirstStep";
+import { GenderStep } from "../components/step/steps/GenderStep";
+import { HairLengthStep } from "../components/step/steps/HairLenghtStep";
+import { LoadingStep } from "../components/step/steps/LoadingStep";
+import { NeutrificationStep } from "../components/step/steps/NeutrificationStep";
+import { TypeStep } from "../components/step/steps/TypeStep";
+import { WalkingTimeStep } from "../components/step/steps/WalkingTimeStep";
+import { WeightStep } from "../components/step/steps/WeightStep";
 import {
 	Carousel,
 	CarouselContent,
@@ -18,7 +27,7 @@ export const Home = (): FunctionComponent => {
 	};
 
 	return (
-		<Carousel setApi={setApi} className="bg-slate-100">
+		<Carousel setApi={setApi} className="bg-[#F7F4E9]">
 			<CarouselContent>
 				<CarouselItem className="basis-full">
 					<FirstStep scrollNext={scrollNext} />
@@ -27,7 +36,31 @@ export const Home = (): FunctionComponent => {
 					<TypeStep {...props} />
 				</CarouselItem>
 				<CarouselItem className="basis-full h-screen">
-					<FirstStep scrollNext={scrollNext} />
+					<AgeStep {...props} />
+				</CarouselItem>
+				<CarouselItem className="basis-full h-screen">
+					<WeightStep {...props} />
+				</CarouselItem>
+				<CarouselItem className="basis-full h-screen">
+					<GenderStep {...props} />
+				</CarouselItem>
+				<CarouselItem className="basis-full h-screen">
+					<NeutrificationStep {...props} />
+				</CarouselItem>
+				<CarouselItem className="basis-full h-screen">
+					<WalkingTimeStep {...props} />
+				</CarouselItem>
+				<CarouselItem className="basis-full h-screen">
+					<HairLengthStep {...props} />
+				</CarouselItem>
+				<CarouselItem className="basis-full h-screen">
+					<BehaviorStep {...props} />
+				</CarouselItem>
+				<CarouselItem className="basis-full h-screen">
+					<ChildcareStep {...props} />
+				</CarouselItem>
+				<CarouselItem className="basis-full h-screen">
+					<LoadingStep />
 				</CarouselItem>
 			</CarouselContent>
 		</Carousel>

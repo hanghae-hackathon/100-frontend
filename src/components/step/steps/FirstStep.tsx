@@ -1,9 +1,9 @@
 import Lottie from "react-lottie";
-import mainDog from "../../assets/main_dog.json";
-import type { FunctionComponent } from "../../common/types";
-import { Button } from "../ui/button";
-import { StepHeader } from "./StepHeader";
-import { StepLayout } from "./StepLayout";
+import mainDog from "../../../assets/main_dog.json";
+import type { FunctionComponent } from "../../../common/types";
+import { Button } from "../../ui/button";
+import { StepHeader } from "../StepHeader";
+import { StepLayout } from "../StepLayout";
 
 type FirstStepProps = {
 	scrollNext: () => void;
@@ -21,7 +21,7 @@ export const FirstStep = ({
 		},
 	};
 	return (
-		<StepLayout>
+		<StepLayout showDogfoot={false}>
 			<StepHeader title="서비스명" size="large" />
 			<div className="h-full flex items-center">
 				<Lottie options={defaultOptions} width={200} height={200} />
