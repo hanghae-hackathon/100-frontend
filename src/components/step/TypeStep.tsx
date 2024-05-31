@@ -1,6 +1,8 @@
 import type { FunctionComponent } from "../../common/types";
 import { AbsoluteButtons } from "../layout/AbsoluteButtons";
+import { Dogfoot } from "../layout/Dogfoot";
 import { Button } from "../ui/button";
+import { Combobox } from "../ui/combobox";
 import { StepHeader } from "./StepHeader";
 import { StepLayout } from "./StepLayout";
 import { StepProgress } from "./StepProgress";
@@ -22,6 +24,9 @@ export const TypeStep = ({
 		<StepLayout>
 			<StepProgress current={current} count={count} />
 			<StepHeader title="선호하는 견종이 있으신가요?" size="medium" />
+			<div className="my-4" />
+			<Combobox />
+
 			<AbsoluteButtons>
 				<Button
 					onClick={scrollPrevious}
@@ -36,6 +41,7 @@ export const TypeStep = ({
 					다음
 				</Button>
 			</AbsoluteButtons>
+			<Dogfoot />
 		</StepLayout>
 	);
 };

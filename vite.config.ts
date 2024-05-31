@@ -14,4 +14,7 @@ export default defineConfig({
 		setupFiles: ["./vitest.setup.ts"],
 		css: true,
 	},
+	build: {
+		minify: false,
+	},
 });
