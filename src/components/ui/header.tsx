@@ -1,3 +1,5 @@
+import { Link } from "@tanstack/react-router";
+
 interface HeaderProps {
 	imgSrc: string;
 	alt: string;
@@ -6,8 +8,9 @@ interface HeaderProps {
 export const Header = ({ imgSrc, alt }: HeaderProps) => {
 	return (
 		<div className="w-full flex flex-1 justify-between items-center p-5">
-			<img src={imgSrc} alt={alt} />
-
+			<Link to="/">
+				<img src={imgSrc} alt={alt} />
+			</Link>
 			<p className="text-lg font-bold">서비스명</p>
 			<div />
 		</div>

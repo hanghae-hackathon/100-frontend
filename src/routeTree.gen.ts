@@ -2,51 +2,106 @@
 
 // Import Routes
 
-import { Route as rootRoute } from './routes/__root'
-import { Route as IndexImport } from './routes/index'
-import { Route as AdminIndexImport } from './routes/admin/index'
-import { Route as AboutIndexImport } from './routes/about/index'
+import { Route as IdIndexImport } from "./routes/$id/index";
+import { Route as rootRoute } from "./routes/__root";
+import { Route as AboutIndexImport } from "./routes/about/index";
+import { Route as AdminIndexImport } from "./routes/admin/index";
+import { Route as DetailIndexImport } from "./routes/detail/index";
+import { Route as DogsIdDetailIndexImport } from "./routes/dogs/$id/detail/index";
+import { Route as DogsIdIndexImport } from "./routes/dogs/$id/index";
+import { Route as DogsIndexImport } from "./routes/dogs/index";
+import { Route as IndexImport } from "./routes/index";
 
 // Create/Update Routes
 
 const IndexRoute = IndexImport.update({
-  path: '/',
-  getParentRoute: () => rootRoute,
-} as any)
+	path: "/",
+	getParentRoute: () => rootRoute,
+} as any);
+
+const DogsIndexRoute = DogsIndexImport.update({
+	path: "/dogs/",
+	getParentRoute: () => rootRoute,
+} as any);
+
+const DetailIndexRoute = DetailIndexImport.update({
+	path: "/detail/",
+	getParentRoute: () => rootRoute,
+} as any);
 
 const AdminIndexRoute = AdminIndexImport.update({
-  path: '/admin/',
-  getParentRoute: () => rootRoute,
-} as any)
+	path: "/admin/",
+	getParentRoute: () => rootRoute,
+} as any);
 
 const AboutIndexRoute = AboutIndexImport.update({
-  path: '/about/',
-  getParentRoute: () => rootRoute,
-} as any)
+	path: "/about/",
+	getParentRoute: () => rootRoute,
+} as any);
+
+const IdIndexRoute = IdIndexImport.update({
+	path: "/$id/",
+	getParentRoute: () => rootRoute,
+} as any);
+
+const DogsIdIndexRoute = DogsIdIndexImport.update({
+	path: "/dogs/$id/",
+	getParentRoute: () => rootRoute,
+} as any);
+
+const DogsIdDetailIndexRoute = DogsIdDetailIndexImport.update({
+	path: "/dogs/$id/detail/",
+	getParentRoute: () => rootRoute,
+} as any);
 
 // Populate the FileRoutesByPath interface
 
-declare module '@tanstack/react-router' {
-  interface FileRoutesByPath {
-    '/': {
-      preLoaderRoute: typeof IndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/about/': {
-      preLoaderRoute: typeof AboutIndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/admin/': {
-      preLoaderRoute: typeof AdminIndexImport
-      parentRoute: typeof rootRoute
-    }
-  }
+declare module "@tanstack/react-router" {
+	interface FileRoutesByPath {
+		"/": {
+			preLoaderRoute: typeof IndexImport;
+			parentRoute: typeof rootRoute;
+		};
+		"/$id/": {
+			preLoaderRoute: typeof IdIndexImport;
+			parentRoute: typeof rootRoute;
+		};
+		"/about/": {
+			preLoaderRoute: typeof AboutIndexImport;
+			parentRoute: typeof rootRoute;
+		};
+		"/admin/": {
+			preLoaderRoute: typeof AdminIndexImport;
+			parentRoute: typeof rootRoute;
+		};
+		"/detail/": {
+			preLoaderRoute: typeof DetailIndexImport;
+			parentRoute: typeof rootRoute;
+		};
+		"/dogs/": {
+			preLoaderRoute: typeof DogsIndexImport;
+			parentRoute: typeof rootRoute;
+		};
+		"/dogs/$id/": {
+			preLoaderRoute: typeof DogsIdIndexImport;
+			parentRoute: typeof rootRoute;
+		};
+		"/dogs/$id/detail/": {
+			preLoaderRoute: typeof DogsIdDetailIndexImport;
+			parentRoute: typeof rootRoute;
+		};
+	}
 }
 
 // Create and export the route tree
 
 export const routeTree = rootRoute.addChildren([
-  IndexRoute,
-  AboutIndexRoute,
-  AdminIndexRoute,
-])
+	IndexRoute,
+	IdIndexRoute,
+	AboutIndexRoute,
+	AdminIndexRoute,
+	DetailIndexRoute,
+	DogsIndexRoute,
+	DogsIdIndexRoute,
+	DogsIdDetailIndexRoute,
+]);
