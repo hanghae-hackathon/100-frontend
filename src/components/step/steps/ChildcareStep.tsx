@@ -1,6 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
+import { useNavigate } from "@tanstack/react-router";
 import type { FunctionComponent } from "../../../common/types";
 import { useRequestIdStore } from "../../../store/request-id";
+import { useResultStore, type SearchResultType } from "../../../store/result";
 import { useSearchStore } from "../../../store/search";
 import { AbsoluteButtons } from "../../layout/AbsoluteButtons";
 import { Button } from "../../ui/button";
@@ -23,24 +26,78 @@ export const ChildcareStep = ({
 	scrollNext,
 	scrollPrevious,
 }: ChildcareStepProps): FunctionComponent => {
+	const navigate = useNavigate();
 	const { searchParams, handleChangeChildcareDifficulty } = useSearchStore();
 	const { setRequestId } = useRequestIdStore();
+	const { handleChangeResult } = useResultStore();
 
 	const handleNext = async (): Promise<void> => {
-		console.log("click");
 		try {
+			scrollNext();
 			const respones = await fetch(
-				"https://58b3-210-217-92-1.ngrok-free.app/dogs/search",
+				"https://58b3-210-217-92-1.ngrok-free.app/dogs",
 				{
-					method: "POST",
+					method: "GET",
 					headers: {
 						"Content-Type": "application/json",
+						"ngrok-skip-browser-warning": "69420",
 					},
-					body: JSON.stringify(searchParams),
 				}
 				// eslint-disable-next-line unicorn/prevent-abbreviations
 			).then((res) => res.json());
 
+			const chat = await fetch("https://api.openai.com/v1/chat/completions", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+					Authorization: `Bearer `,
+				},
+				body: JSON.stringify({
+					model: "gpt-3.5-turbo",
+					messages: [
+						{
+							role: "user",
+							content: `
+						${JSON.stringify(respones)}
+
+						나는 유기견 강아지를 입양하는데, 필터링을 해주는 서비스를 해주고 있어.
+						위의 JSON은 강아지 정보들이야.
+
+						지금 내가 보내는 어떤 유저가 원하는 강아지야.
+						${JSON.stringify(searchParams)}
+							
+						가장 최적의 강아지를 추천해주면 좋겠어.
+						응답으로 가장 최적의 강아지 JSON정보만 보내주고 아무 말도 하지 말아줘.
+						예시 응답)
+						{
+							"id": 34,
+							"video": "https://www.youtube.com/watch?v=iPwajsJ7Z8E",
+							"image": "https://example.com/image",
+							"type": "보더콜리",
+							"name": "뽀삐",
+							"age": 10,
+							"weight": 10,
+							"sex": "woman",
+							"neutrification": false,
+							"walkingTime": 30,
+							"hairLength": "long",
+							"childcareDifficulty": 0,
+							"independent": false
+						} 
+					`,
+						},
+					],
+				}),
+				// eslint-disable-next-line unicorn/prevent-abbreviations
+			}).then((res) => res.json());
+
+			const result = JSON.parse(
+				// eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-member-access
+				(chat as any).choices[0].message.content as string
+			);
+			handleChangeResult(result as SearchResultType);
+
+			console.log("리스폰스에요", respones);
 			setRequestId(
 				(
 					respones as {
@@ -48,8 +105,16 @@ export const ChildcareStep = ({
 					}
 				).requestId
 			);
-			console.log("respones", respones);
-			scrollNext();
+
+			setTimeout(() => {
+				void navigate({
+					to: "/$id",
+					params: {
+						// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+						id: (result as any).id as string,
+					},
+				});
+			}, 3000);
 		} catch (error) {
 			console.error("error", error);
 		}

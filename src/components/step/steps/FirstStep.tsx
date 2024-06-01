@@ -1,6 +1,7 @@
 import Lottie from "react-lottie";
 import mainDog from "../../../assets/main_dog.json";
 import type { FunctionComponent } from "../../../common/types";
+import { useSearchStore } from "../../../store/search";
 import { Button } from "../../ui/button";
 import { StepHeader } from "../StepHeader";
 import { StepLayout } from "../StepLayout";
@@ -20,6 +21,13 @@ export const FirstStep = ({
 			preserveAspectRatio: "xMidYMid slice",
 		},
 	};
+
+	const { handleClear } = useSearchStore();
+	const handleNext = (): void => {
+		scrollNext();
+		handleClear();
+	};
+
 	return (
 		<StepLayout showDogfoot={false}>
 			<StepHeader title="반려멍" size="large" />
@@ -32,7 +40,7 @@ export const FirstStep = ({
 				<Lottie options={defaultOptions} width={200} height={200} />
 			</div>
 			<div className="absolute bottom-10 w-full flex gap-3 px-4">
-				<Button className="flex-1" onClick={scrollNext} size="lg">
+				<Button className="flex-1" onClick={handleNext} size="lg">
 					다음
 				</Button>
 			</div>
