@@ -37,18 +37,18 @@ export const WeightStep = ({
 				isSub={true}
 			/>
 			<div className="my-4" />
-			<Select>
+			<Select
+				onValueChange={(value) => {
+					handleChangeWeight(Number(value));
+				}}
+			>
 				<SelectTrigger className="w-[180px]">
 					<SelectValue placeholder="선택해주세요" />
 				</SelectTrigger>
-				<SelectContent
-					onChange={(value) => {
-						handleChangeWeight(Number(value));
-					}}
-				>
+				<SelectContent>
 					<SelectItem value="5">소형견</SelectItem>
 					<SelectItem value="10">중형견</SelectItem>
-					<SelectItem value="15">대형건</SelectItem>
+					<SelectItem value="15">대형견</SelectItem>
 				</SelectContent>
 			</Select>
 			<AbsoluteButtons>

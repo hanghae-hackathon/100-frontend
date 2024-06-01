@@ -62,7 +62,7 @@ export const BehaviorStep = ({
 						setValue(event.target.value);
 					}}
 					onKeyDown={handleKeyPress}
-					placeholder="ex) 0살"
+					placeholder="ex) 얌전함, 활발함, 사교적"
 				/>
 				<Button
 					onClick={() => {

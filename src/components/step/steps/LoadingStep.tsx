@@ -1,11 +1,17 @@
-import { useEffect, useState } from "react";
+/* eslint-disable @typescript-eslint/no-floating-promises */
+/* eslint-disable unicorn/prevent-abbreviations */
+import { useCallback, useEffect, useState } from "react";
 import Lottie from "react-lottie";
 import waitDog from "../../../assets/wait_dog.json";
 import type { FunctionComponent } from "../../../common/types";
+import { useRequestIdStore } from "../../../store/request-id";
 import { StepHeader } from "../StepHeader";
 import { StepLayout } from "../StepLayout";
 
 export const LoadingStep = (): FunctionComponent => {
+	const { requestId } = useRequestIdStore();
+	console.log("loading step", requestId);
+
 	const defaultOptions = {
 		loop: true,
 		autoplay: true,
@@ -25,6 +31,43 @@ export const LoadingStep = (): FunctionComponent => {
 				return dots + ".";
 			});
 		}, 500);
+		return () => {
+			clearInterval(interval);
+		};
+	}, []);
+
+	const polling = useCallback(async (): Promise<void> => {
+		try {
+			console.log(requestId);
+			const response = await fetch(
+				`https://58b3-210-217-92-1.ngrok-free.app/dogs/search/result/${1}`,
+				{
+					method: "GET",
+					headers: {
+						"Content-Type": "application/json",
+					},
+				}
+			)
+				.then((res) => {
+					console.log(res);
+					return res.json();
+				})
+				.then((data) => {
+					console.log(data);
+					return data;
+				});
+		} catch (error) {
+			console.error("error", error);
+		}
+	}, [requestId]);
+
+	useEffect(() => {
+		// 5초마다 polling
+		if (!requestId) return;
+		const interval = setInterval(() => {
+			polling();
+		}, 300);
+
 		return () => {
 			clearInterval(interval);
 		};

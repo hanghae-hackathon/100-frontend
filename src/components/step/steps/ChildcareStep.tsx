@@ -1,4 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 import type { FunctionComponent } from "../../../common/types";
+import { useRequestIdStore } from "../../../store/request-id";
 import { useSearchStore } from "../../../store/search";
 import { AbsoluteButtons } from "../../layout/AbsoluteButtons";
 import { Button } from "../../ui/button";
@@ -22,6 +24,39 @@ export const ChildcareStep = ({
 	scrollPrevious,
 }: ChildcareStepProps): FunctionComponent => {
 	const { searchParams, handleChangeChildcareDifficulty } = useSearchStore();
+	const { setRequestId } = useRequestIdStore();
+
+	const handleNext = async (): Promise<void> => {
+		console.log("click");
+		try {
+			const respones = await fetch(
+				"https://58b3-210-217-92-1.ngrok-free.app/dogs/search",
+				{
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify(searchParams),
+				}
+				// eslint-disable-next-line unicorn/prevent-abbreviations
+			).then((res) => res.json());
+
+			setRequestId(
+				(
+					respones as {
+						requestId: string;
+					}
+				).requestId
+			);
+			console.log("respones", respones);
+			scrollNext();
+		} catch (error) {
+			console.error("error", error);
+		}
+		scrollNext();
+	};
+	console.log("searchParams", searchParams);
+
 	return (
 		<StepLayout>
 			<StepProgress current={current} count={count} />
@@ -56,7 +91,10 @@ export const ChildcareStep = ({
 					이전
 				</Button>
 				<Button
-					onClick={scrollNext}
+					onClick={() => {
+						// eslint-disable-next-line @typescript-eslint/no-floating-promises
+						handleNext();
+					}}
 					className="flex-1  text-white py-4"
 					disabled={searchParams.childcareDifficulty === undefined}
 				>
