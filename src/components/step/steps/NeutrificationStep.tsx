@@ -25,7 +25,8 @@ export const NeutrificationStep = ({
 	return (
 		<StepLayout>
 			<StepProgress current={current} count={count} />
-			<StepHeader title="중성화 여부를 골라주세요" size="medium" />
+			<StepHeader title="중성화 여부를 골라주세요" size="large" />
+			<StepHeader title="2세를 만들고 싶다면.." size="medium" isSub={true} />
 			<div className="my-4" />
 			<RadioGroup
 				defaultValue="option-one"

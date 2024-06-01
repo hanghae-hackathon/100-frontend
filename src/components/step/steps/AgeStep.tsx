@@ -25,7 +25,12 @@ export const AgeStep = ({
 	return (
 		<StepLayout>
 			<StepProgress current={current} count={count} />
-			<StepHeader title="선호하시는 연령대를 알려주세요" size="medium" />
+			<StepHeader title="선호하시는 연령대를 알려주세요" size="large" />
+			<StepHeader
+				title="연령에 따라 성격이나 특징이 다를 수 있어요!"
+				size="medium"
+				isSub={true}
+			/>
 			<div className="my-4" />
 			<div className="flex gap-2 items-center">
 				<Input

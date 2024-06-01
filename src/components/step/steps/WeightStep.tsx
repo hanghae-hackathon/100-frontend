@@ -30,7 +30,12 @@ export const WeightStep = ({
 	return (
 		<StepLayout>
 			<StepProgress current={current} count={count} />
-			<StepHeader title="선호하시는 강아지 크기를 알려주세요" size="medium" />
+			<StepHeader title="어떤 크기의 친구가 좋으신가요?" size="large" />
+			<StepHeader
+				title="작으면 앙 귀엽고 크면 왕 귀여워요"
+				size="medium"
+				isSub={true}
+			/>
 			<div className="my-4" />
 			<Select>
 				<SelectTrigger className="w-[180px]">

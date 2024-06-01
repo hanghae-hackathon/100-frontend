@@ -112,7 +112,7 @@ export const Combobox = (): FunctionComponent => {
 				>
 					{searchParams.type
 						? dogs.find((dog) => dog.value === searchParams.type)?.label
-						: "Select dog..."}
+						: "견종을 선택해주세요"}
 					<ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
 				</Button>
 			</PopoverTrigger>

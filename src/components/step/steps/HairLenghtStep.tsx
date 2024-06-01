@@ -1,12 +1,16 @@
 import type { FunctionComponent } from "../../../common/types";
 import { useSearchStore, type DogHairLength } from "../../../store/search";
 import { AbsoluteButtons } from "../../layout/AbsoluteButtons";
+import { CenterBox } from "../../layout/CenterBox";
 import { Button } from "../../ui/button";
 import { Label } from "../../ui/label";
 import { RadioGroup, RadioGroupItem } from "../../ui/radio-group";
 import { StepHeader } from "../StepHeader";
 import { StepLayout } from "../StepLayout";
 import { StepProgress } from "../StepProgress";
+
+import Lottie from "react-lottie";
+import hairDog from "../../../assets/hair_dog.json";
 
 interface HairLengthStepProps {
 	count: number;
@@ -22,10 +26,25 @@ export const HairLengthStep = ({
 	scrollPrevious,
 }: HairLengthStepProps): FunctionComponent => {
 	const { searchParams, handleChangeHairLength } = useSearchStore();
+
+	const defaultOptions = {
+		loop: true,
+		autoplay: true,
+		animationData: hairDog,
+		rendererSettings: {
+			preserveAspectRatio: "xMidYMid slice",
+		},
+	};
+
 	return (
-		<StepLayout>
+		<StepLayout showDogfoot={false}>
 			<StepProgress current={current} count={count} />
-			<StepHeader title="어떤 털을 가진 친구를 좋아하시나요?" size="medium" />
+			<StepHeader title="어떤 털의 강아지를 좋아하세요?" size="large" />
+			<StepHeader
+				title="'무모한'강아지와 털빵이들 중 어떤 쪽이 좋으신가요?"
+				size="medium"
+				isSub={true}
+			/>
 			<div className="my-4" />
 			<RadioGroup
 				defaultValue="option-one"
@@ -58,6 +77,9 @@ export const HairLengthStep = ({
 					다음
 				</Button>
 			</AbsoluteButtons>
+			<CenterBox>
+				<Lottie options={defaultOptions} height={300} width={300} />
+			</CenterBox>
 		</StepLayout>
 	);
 };

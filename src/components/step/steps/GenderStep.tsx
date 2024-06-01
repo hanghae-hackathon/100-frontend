@@ -25,7 +25,12 @@ export const GenderStep = ({
 	return (
 		<StepLayout>
 			<StepProgress current={current} count={count} />
-			<StepHeader title="선호하시는 성별을 알려주세요" size="medium" />
+			<StepHeader title="선호하시는 성별을 알려주세요" size="large" />
+			<StepHeader
+				title="왕자님과 공주님 중 골라보세요!"
+				size="medium"
+				isSub={true}
+			/>
 			<div className="my-4" />
 			<RadioGroup
 				defaultValue="option-one"

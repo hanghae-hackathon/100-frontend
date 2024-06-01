@@ -48,7 +48,12 @@ export const BehaviorStep = ({
 	return (
 		<StepLayout>
 			<StepProgress current={current} count={count} />
-			<StepHeader title="어떤 성격의 친구가 좋으신가요?" size="medium" />
+			<StepHeader title="어떤 성격의 친구가 좋으신가요?" size="large" />
+			<StepHeader
+				title="함께 살아가고 싶은 친구의 성격을 알려주세요"
+				size="medium"
+				isSub={true}
+			/>
 			<div className="my-4" />
 			<div className="flex gap-2 items-center">
 				<Input

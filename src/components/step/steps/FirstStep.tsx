@@ -22,7 +22,12 @@ export const FirstStep = ({
 	};
 	return (
 		<StepLayout showDogfoot={false}>
-			<StepHeader title="서비스명" size="large" />
+			<StepHeader title="반려멍" size="large" />
+			<StepHeader
+				title="나와 찰떡 반려멍이 기다리고 있어요"
+				size="medium"
+				isSub={true}
+			/>
 			<div className="h-full flex items-center">
 				<Lottie options={defaultOptions} width={200} height={200} />
 			</div>

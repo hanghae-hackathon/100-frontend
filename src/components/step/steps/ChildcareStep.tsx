@@ -25,7 +25,12 @@ export const ChildcareStep = ({
 	return (
 		<StepLayout>
 			<StepProgress current={current} count={count} />
-			<StepHeader title="강아지를 키워본 경험이 있으신가요?" size="medium" />
+			<StepHeader title="강아지를 키워본 경험이 있으신가요?" size="large" />
+			<StepHeader
+				title="있다면 저도 좀 데려가세요 헥헥"
+				size="medium"
+				isSub={true}
+			/>
 			<div className="my-4" />
 			<RadioGroup
 				defaultValue="option-one"
