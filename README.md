@@ -17,6 +17,13 @@
 ## 애플리케이션 소개
 ![image](https://github.com/hanghae-hackathon/100-frontend/assets/80272444/0e95d59f-3d9a-4e1b-9246-5c75cec00b5b)
 
+관리자
+https://drive.google.com/file/d/10jxj82oBVksN8XCD3h4JEO2lMloAVnm5/view?usp=drive_link
+메인
+https://drive.google.com/file/d/1FzvvExxgEYuod7FoGbptTwwpDqjdVhX4/view?usp=drive_link
+
+
+
 반려멍은 모바일에서 편하게 이용할 수 있는 UI로 `모바일 웹`에서 원활하게 제공해요.
 모바일 웹에서 나와 알맞는 강아지를 찾기 위한 여정을 떠나요.
 
